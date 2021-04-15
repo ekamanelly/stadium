@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "109245269780",
+    "project_id": "stadium-42062",
+    "storage_bucket": "stadium-42062.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109245269780:android:2ab50bffaf11e14aa1a401",
+        "android_client_info": {
+          "package_name": "com.ekama.stadium.stadium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "109245269780-7ulfo04gm0onch1s7j4466j90v74iv0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-T_KIS7wsThcRbsR0ixAtJMHduJXfC1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "109245269780-7ulfo04gm0onch1s7j4466j90v74iv0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
