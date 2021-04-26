@@ -12,7 +12,7 @@ class StadiumBottomNavBar extends StatefulWidget {
 }
 
 class _StadiumBottomNavBarState extends State<StadiumBottomNavBar> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   final _children = [
     HomeScreen(),
     ScoreBoardScreen(),
@@ -46,7 +46,7 @@ class _StadiumBottomNavBarState extends State<StadiumBottomNavBar> {
               style: TextStyle(color: Colors.white70),
             ),
             activeColor: HexColor('#71cc49'),
-            inactiveColor: HexColor('#71cc49').withOpacity(0.3),
+//            inactiveColor: HexColor('#71cc49').withOpacity(0.3),
             textAlign: TextAlign.start,
           ),
           BottomNavyBarItem(

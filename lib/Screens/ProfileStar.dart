@@ -3,9 +3,13 @@ import 'package:stadium/componets/BottomCurve.dart';
 import 'package:stadium/componets/TopCurve.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import 'package:provider/provider.dart';
+import 'package:stadium/store/user.dart';
+
 class ProfileStar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var username = Provider.of<User>(context, listen: false).username;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -39,7 +43,7 @@ class ProfileStar extends StatelessWidget {
 //                        child: Image.asset('images/ekama.jpeg'),
                         backgroundImage: AssetImage('images/ekama.jpeg'),
                       ),
-                      title: Text('Dmx'),
+                      title: Text('$username'),
                       subtitle: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -173,28 +177,6 @@ class ProfileStar extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            height: 160,
-                            width: 30,
-                            child: Center(
-                              child: RotatedBox(
-                                  quarterTurns: 3, child: Text("Wins")),
-                            ),
-                            decoration: BoxDecoration(
-                              color: HexColor("#0f140f"),
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(15)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: HexColor('#99D478').withOpacity(1),
-                                  spreadRadius: 1,
-                                  blurRadius: 1,
-                                  offset: Offset(
-                                      0, 1), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
                             height: 140,
                             width: 30,
                             child: Center(
@@ -222,6 +204,28 @@ class ProfileStar extends StatelessWidget {
                             child: Center(
                               child: RotatedBox(
                                   quarterTurns: 3, child: Text("Point")),
+                            ),
+                            decoration: BoxDecoration(
+                              color: HexColor("#0f140f"),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: HexColor('#99D478').withOpacity(1),
+                                  spreadRadius: 1,
+                                  blurRadius: 1,
+                                  offset: Offset(
+                                      0, 1), // changes position of shadow
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            height: 160,
+                            width: 30,
+                            child: Center(
+                              child: RotatedBox(
+                                  quarterTurns: 3, child: Text("Wins")),
                             ),
                             decoration: BoxDecoration(
                               color: HexColor("#0f140f"),

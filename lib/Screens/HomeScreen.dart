@@ -8,6 +8,9 @@ import 'package:stadium/componets/TopCurve.dart';
 import 'package:stadium/componets/TestPaint.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import 'package:provider/provider.dart';
+import 'package:stadium/store/user.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -16,42 +19,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    var username = Provider.of<User>(context, listen: false).username;
     return Scaffold(
-//      appBar: AppBar(
-//        title: BottomCurve(
-//          Container(
-//            child: Text('eeeee'),
-//          ),
-//          60.0,
-//          MediaQuery.of(context).size.width,
-//          HexColor("#031C06"),
-//        ),
-//        elevation: 0,
-//      ),
       body: Container(
-//        decoration: BoxDecoration(
-//          gradient: LinearGradient(
-//            begin: Alignment.topRight,
-//            end: Alignment.bottomLeft,
-////          begin: Alignment.topCenter,
-////          end: Alignment.bottomRight,
-//            stops: [
-//              0.1,
-//              0.4,
-//              0.6,
-//              0.9,
-//            ],
-//            colors: [
-//              Colors.yellow,
-////            Colors.red,
-//              HexColor('#053A06'),
-//              HexColor('#71CC49'),
-////            Colors.indigo,
-//
-//              HexColor('#031C06'),
-//            ],
-//          ),
-//        ),
         child: SingleChildScrollView(
           child: Center(
             child: SizedBox(
@@ -60,28 +30,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   TopAndBottomCurve(
                     Container(
-//                      decoration: BoxDecoration(
-//                          gradient: LinearGradient(
-//                        begin: Alignment.topRight,
-//                        end: Alignment.bottomLeft,
-////          begin: Alignment.topCenter,
-////          end: Alignment.bottomRight,
-//                        stops: [
-//                          0.1,
-//                          0.4,
-//                          0.6,
-//                          0.9,
-//                        ],
-//                        colors: [
-//                          Colors.yellow,
-////            Colors.red,
-//                          HexColor('#053A06'),
-//                          HexColor('#71CC49'),
-////            Colors.indigo,
-//
-//                          HexColor('#031C06'),
-//                        ],
-//                      )),
                       child: Column(
                         children: [
                           SizedBox(
@@ -100,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         radius: 25.0,
 //                        child: Image.asset('images/ekama.jpeg'),
                                         backgroundImage:
-                                            AssetImage('images/ekama.jpeg'),
+                                            AssetImage('images/female.png'),
                                       ),
                                     ],
                                   ),
@@ -110,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        'ekama',
+                                        '$username',
                                         style: TextStyle(color: Colors.white),
                                       ),
                                       SizedBox(
@@ -166,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icon(
                                   Icons.favorite_rounded,
                                   size: 13,
-                                  color: Colors.white,
+                                  color: Colors.redAccent,
                                 ),
                               ],
                             ),
@@ -176,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 TextButton(
                                   onPressed: () {},
                                   child: Text(
-                                    'West Bromwich vs Southampton',
+                                    'West Bromwich vs Liverpool',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 )
@@ -214,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 TextButton(
                                   onPressed: () {},
                                   child: Text(
-                                    'West Bromwich vs Southampton',
+                                    'Over 2.5 goals',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 )
@@ -240,57 +188,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-
-//          TopAndBottomCurve(
-//            Container(),
-//            MediaQuery.of(context).size.height * 1 / 3,
-//            MediaQuery.of(context).size.width,
-//            Colors.yellowAccent,
-//          ),
-//        ],
-//      ),
     );
   }
 }
-
-//class karmaCurves extends CustomClipper<Path> {
-//  @override
-//  Path getClip(Size size) {
-//    Path path = Path();
-//    print('params');
-//    print(size.height);
-//    print(size.width);
-//    path.lineTo(0.0, size.height - 20);
-//
-//    var firstControlPoint = Offset(size.width / 4, size.height);
-//    var firstEndPoint = Offset(size.width / 2.25, size.height - 30.0);
-//    path.quadraticBezierTo(firstControlPoint.dx, firstControlPoint.dy,
-//        firstEndPoint.dx, firstEndPoint.dy);
-//
-//    var secondControlPoint =
-//        Offset(size.width - (size.width / 3.25), size.height - 65);
-//    var secondEndPoint = Offset(size.width, size.height - 40);
-//    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-//        secondEndPoint.dx, secondEndPoint.dy);
-//
-//    path.lineTo(size.width, size.height - 40);
-//    path.lineTo(size.width, 20);
-//
-//    var topFirstControlPoint = Offset(size.width / 1.4, 0.0);
-//    var toPFirstEndPoint = Offset(size.width / 2.25, 30.0);
-//    path.quadraticBezierTo(topFirstControlPoint.dx, topFirstControlPoint.dy,
-//        toPFirstEndPoint.dx, toPFirstEndPoint.dy);
-//
-//    var topLeftControlPoint = Offset(size.width / 6.5, 65);
-//    var topLeftEndPoint = Offset(0.0, 40);
-//    path.quadraticBezierTo(topLeftControlPoint.dx, topLeftControlPoint.dy,
-//        topLeftEndPoint.dx, topLeftEndPoint.dy);
-//    path.close();
-//    return path;
-//  }
-//
-//  @override
-//  bool shouldReclip(CustomClipper<Path> oldClipper) {
-//    return true;
-//  }
-//}

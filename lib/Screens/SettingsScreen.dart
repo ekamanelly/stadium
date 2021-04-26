@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:stadium/componets/toastForMe.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
+import 'package:stadium/store/user.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -10,6 +14,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _switchedON = true;
   @override
   Widget build(BuildContext context) {
+    var email = Provider.of<User>(context, listen: false).email;
     return Scaffold(
 //        appBar: AppBar(),
         body: SafeArea(
@@ -25,6 +30,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               title: Text(
                 'Email',
                 style: TextStyle(fontSize: 15),
+              ),
+              subtitle: Text(
+                '$email',
+                style: TextStyle(fontSize: 11),
               ),
               trailing: Icon(
                 Icons.arrow_forward_ios,
@@ -72,6 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 activeColor: HexColor('#71cc49'),
                 value: _switchedON,
                 onChanged: (value) {
+                  toastForMe('still working on the light mood', 'success');
                   setState(() {
                     _switchedON = value;
                   });
@@ -79,6 +89,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
+              onTap: () async {
+                SharedPreferences sharedPref =
+                    await SharedPreferences.getInstance();
+                sharedPref.setString('user', '');
+                sharedPref.setString('password', '');
+                Navigator.of(context).pushReplacementNamed('/login');
+              },
               leading: Icon(
                 Icons.logout,
                 size: 20.0,

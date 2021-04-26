@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:stadium/Screens/RegistrationScreenTwo.dart';
+
 //import 'package:fire';
 
 class RegistrationScreenOne extends StatelessWidget {
@@ -13,17 +16,17 @@ class RegistrationScreenOne extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Form(
+          key: _formKey,
           child: Column(
-            key: _formKey,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Padding(
                         padding: EdgeInsets.only(right: 5, left: 5),
                         child: Container(
@@ -34,27 +37,20 @@ class RegistrationScreenOne extends StatelessWidget {
                             color: HexColor("#0f140f"),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: TextButton(
-                            child: Text(
-                              '234',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            onPressed: () {
-                              showCountryPicker(
-                                context: context,
-                                countryListTheme: CountryListThemeData(
-                                  flagSize: 25,
-                                  backgroundColor: Colors.white,
-                                  textStyle: TextStyle(
-                                      fontSize: 16, color: Colors.blueGrey),
-                                ),
-                                onSelect: (Country country) => {
-//                                  _countryCodeController = ,
-                                  print(country),
-                                  print(
-                                      'Select country: ${country.displayName}')
-                                },
-                              );
+                          child: CountryCodePicker(
+                            dialogBackgroundColor: HexColor("#0f140f"),
+                            onChanged: (val) {
+                              _countryCodeController = val;
+                              print(_countryCodeController);
+                            },
+                            // Initial selection and favorite can be one of code ('IT') OR dial_code('+39')
+                            initialSelection: 'NG',
+                            favorite: ['+234', 'NG'],
+                            showFlagDialog: true,
+                            comparator: (a, b) => b.name.compareTo(a.name),
+                            onInit: (code) {
+                              _countryCodeController = code.dialCode;
+                              // print("on init ${code.name} ${code.dialCode} ${code.name}");
                             },
                           ),
                         ),
@@ -72,6 +68,12 @@ class RegistrationScreenOne extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter password';
+                            }
+                            return null;
+                          },
                           keyboardType: TextInputType.phone,
                           controller: _phoneController,
                           decoration: InputDecoration(
@@ -100,7 +102,7 @@ class RegistrationScreenOne extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    top: 30, right: 50, left: 50, bottom: 143),
+                    top: 30, right: 50, left: 50, bottom: 5),
                 child: Container(
                   decoration: BoxDecoration(
                     color: HexColor('#ffffff'),
@@ -112,15 +114,21 @@ class RegistrationScreenOne extends StatelessWidget {
                     style: ButtonStyle(),
 //                      color: Colors.green,
                     onPressed: () {
-                      print(_countryCodeController.text);
-                      print(_phoneController);
-//                      Navigator.pushNamed(
-//                        context,
-//                        '/registration/two',
-//                      );
+                      if (_formKey.currentState.validate()) {
+                        print(_countryCodeController);
+                        print(_phoneController.text);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistrationScreenTwo(
+                                    phone:
+                                        '$_countryCodeController${_phoneController.text}',
+                                  )),
+                        );
+                      }
                     },
                     child: Text(
-                      'Register',
+                      'contiune',
                       style: TextStyle(
                         color: HexColor('#71cc49'),
                       ),
@@ -128,6 +136,22 @@ class RegistrationScreenOne extends StatelessWidget {
                   ),
                 ),
               ),
+              Padding(
+                  padding: const EdgeInsets.only(
+                      top: 30, right: 50, left: 50, bottom: 60),
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () => Navigator.pushNamed(context, '/login'),
+                    child: Container(
+//                    decoration: BoxDecoration(
+//                      color: HexColor('#ffffff'),
+//                      borderRadius: BorderRadius.circular(10.0),
+//                    ),
+//                      height: 40,
+//                      width: MediaQuery.of(context).size.width / 2,
+                      child: Text('Have an account?'),
+                    ),
+                  )),
             ],
           ),
         ),
